@@ -5,8 +5,8 @@ import os
 import json
 import pandas as pd
 from typing import List, Dict, Any
-from app.repositories.llm_obj import call_llm
-from app.services.data_stuff import parse_llm_output
+from app_core.repositories.llm_obj import call_llm
+from app_core.services.data_stuff import parse_llm_output
 
 
 def categorize_posts(df: pd.DataFrame, model: str = "tngtech/deepseek-r1t-chimera:free") -> List[Dict[str, Any]]:

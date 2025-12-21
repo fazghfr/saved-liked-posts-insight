@@ -6,8 +6,8 @@ from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 import pandas as pd
 
-from app.services.data_stuff import get_random_posts, process_post_data
-from app.services.categ import categorize_posts, save_categorization_results
+from app_core.services.data_stuff import get_random_posts, process_post_data
+from app_core.services.categ import categorize_posts, save_categorization_results
 
 
 router = APIRouter(prefix="/posts", tags=["posts"])

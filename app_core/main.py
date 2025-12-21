@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import intrs
+from app_core.routers import intrs
 
 # Load environment variables from .env file
 load_dotenv()

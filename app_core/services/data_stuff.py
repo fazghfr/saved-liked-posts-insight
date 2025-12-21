@@ -3,7 +3,7 @@ Data processing service - contains business logic for Instagram data processing.
 """
 import pandas as pd
 from typing import Dict, Any, Optional
-from app.repositories.data_prs import load_instagram_data
+from app_core.repositories.data_prs import load_instagram_data
 
 
 def get_random_posts(mode: str, sample_num: int = 10, seed: int = 42) -> pd.DataFrame:
