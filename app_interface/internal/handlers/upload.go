@@ -52,10 +52,10 @@ func (h *UploadHandler) UploadJSON(c *gin.Context) {
 
 	// Create upload record
 	upload := models.Upload{
-		ID:        uploadID,
-		Filename:  file.Filename,
-		StoredAs:  filename,
-		Size:      file.Size,
+		ID:         uploadID,
+		Filename:   file.Filename,
+		StoredAs:   filename,
+		Size:       file.Size,
 		UploadedAt: time.Now(),
 	}
 
@@ -88,10 +88,43 @@ func (h *UploadHandler) GetUpload(c *gin.Context) {
 
 // ListUploads lists all uploads
 func (h *UploadHandler) ListUploads(c *gin.Context) {
-	// TODO: Implement database query to list all uploads
-	// For now, return empty list
+	// Get list of files from storage
+	files, err := h.storage.ListFiles()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": fmt.Sprintf("Failed to list uploads: %v", err),
+		})
+		return
+	}
+
+	// Convert file info to upload models
+	uploads := make([]models.Upload, 0, len(files))
+	for _, file := range files {
+		// Extract upload ID from filename (remove .json extension)
+		uploadID := filepath.Base(file.Name)
+		if ext := filepath.Ext(uploadID); ext != "" {
+			uploadID = uploadID[:len(uploadID)-len(ext)]
+		}
+
+		// Parse modification time
+		uploadedAt, err := time.Parse("2006-01-02 15:04:05", file.ModTime)
+		if err != nil {
+			// If parsing fails, use current time as fallback
+			uploadedAt = time.Now()
+		}
+
+		upload := models.Upload{
+			ID:         uploadID,
+			Filename:   file.Name, // Original filename is not stored, using stored filename
+			StoredAs:   file.Name,
+			Size:       file.Size,
+			UploadedAt: uploadedAt,
+		}
+		uploads = append(uploads, upload)
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"uploads": []models.Upload{},
-		"count":   0,
+		"uploads": uploads,
+		"count":   len(uploads),
 	})
 }
