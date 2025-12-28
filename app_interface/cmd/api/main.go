@@ -10,10 +10,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fazghfr/saved-liked-posts-insight/app_interface/internal/config"
-	"github.com/fazghfr/saved-liked-posts-insight/app_interface/internal/handlers"
-	"github.com/fazghfr/saved-liked-posts-insight/app_interface/internal/middleware"
-	"github.com/fazghfr/saved-liked-posts-insight/app_interface/internal/services"
+	"app_interface/internal/config"
+	"app_interface/internal/handlers"
+	"app_interface/internal/middleware"
+	"app_interface/internal/services"
+
 	"github.com/gin-gonic/gin"
 )
 

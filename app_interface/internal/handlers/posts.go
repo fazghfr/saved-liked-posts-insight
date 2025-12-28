@@ -3,8 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/fazghfr/saved-liked-posts-insight/app_interface/internal/models"
-	"github.com/fazghfr/saved-liked-posts-insight/app_interface/internal/services"
+	"app_interface/internal/models"
+	"app_interface/internal/services"
+
 	"github.com/gin-gonic/gin"
 )
 

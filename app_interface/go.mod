@@ -1,4 +1,4 @@
-module github.com/fazghfr/saved-liked-posts-insight/app_interface
+module app_interface
 
 go 1.23.4
 

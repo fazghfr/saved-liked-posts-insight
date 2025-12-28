@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/fazghfr/saved-liked-posts-insight/app_interface/internal/models"
+	"app_interface/internal/models"
 )
 
 // CoreClient is an HTTP client for communicating with app_core
@@ -31,24 +31,24 @@ func NewCoreClient(baseURL string) *CoreClient {
 // SamplePosts calls the app_core sample posts endpoint
 func (c *CoreClient) SamplePosts(ctx context.Context, req *models.SamplePostsRequest) (*models.SamplePostsResponse, error) {
 	url := fmt.Sprintf("%s/posts/sample", c.baseURL)
-	
+
 	var response models.SamplePostsResponse
 	if err := c.doRequest(ctx, "POST", url, req, &response); err != nil {
 		return nil, err
 	}
-	
+
 	return &response, nil
 }
 
 // CategorizePosts calls the app_core categorize endpoint
 func (c *CoreClient) CategorizePosts(ctx context.Context, req *models.CategorizeRequest) (*models.CategorizeResponse, error) {
 	url := fmt.Sprintf("%s/posts/categorize", c.baseURL)
-	
+
 	var response models.CategorizeResponse
 	if err := c.doRequest(ctx, "POST", url, req, &response); err != nil {
 		return nil, err
 	}
-	
+
 	return &response, nil
 }
 
